@@ -181,7 +181,7 @@ class GTSensor:
 		else:
 			raise RuntimeError("Couldn't send packet.")
 
-	def CheckEnrolled(self, templateID):
+	def checkEnrolled(self, templateID):
 		if self.writePacket(GT521F5.CHECK_ENROLLED.value, templateID):
 			return self.receivedPacket()
 		else:

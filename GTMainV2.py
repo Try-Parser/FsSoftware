@@ -24,7 +24,7 @@ class App:
 		id = 0;
 
 		while True and id <= 2999 :
-			resp = self.CheckEnrolled(id)
+			resp = self.sensor.checkEnrolled(id)
 			print(resp);
 
 			if GT521F5.ERRORSalue[check_id["Parameter"]] is 'NACK_IS_NOT_USED':
