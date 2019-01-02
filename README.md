@@ -6,6 +6,8 @@
 
 #### - Installation 
 ````
+  sudo apt-get update && apt-get upgrade
+
   sudo apt-get install build-essential checkinstall
   
   sudo apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev
@@ -18,6 +20,11 @@
   ./configure --enable-optimizations --with-ssl
 
   make && make altinstall
+````
+
+#### - Installation of libs
+````
+    pip3.6 install pyserial && pip3.6 install websocket-clients
 ````
 
 #### - Resources Link
