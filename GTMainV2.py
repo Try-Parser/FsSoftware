@@ -11,6 +11,14 @@ class App:
 		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
 		self.getId();
 
+		print ("Setting baudrate from 9600 to 57600")
+		baudrateResult = self.sensor.setBaudrate(57600)
+		print ("baudrate :" + str(baudrateResult));
+		print ("Setting is done testing for LED lights")
+		self.sensor.LED(True)
+		time.sleep(0.5)
+		self.sensor.LED(False)	
+
 	def getId(self):
 		id = 0;
 
