@@ -9,7 +9,7 @@ import threading
 class App:
 	def __init__(self):
 		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
-		
+
 		print ("Setting baudrate from 9600 to 57600")
 		baudrateResult = self.sensor.setBaudrate(57600)
 		print ("baudrate :" + str(baudrateResult));
@@ -34,3 +34,6 @@ class App:
 	def enroll(self, id, ws):
 		confirmation = self.sensor.startEnrollment()
 
+
+if __name__ == '__main__':
+	App()
