@@ -2,7 +2,7 @@
 
 ## Raspberry pi 3 + GT-521F52 Scanner
 
-### Python3.7.2
+### Python3.6.3
 
 #### - Installation 
 ````
