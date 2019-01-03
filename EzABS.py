@@ -16,7 +16,7 @@ class EzABS:
 			header = {'type:sensor'})
 
 		self.app = App()
-		
+
 		print (hex(uuid.getnode())) 
 
 		self.ws.on_open = self.on_open
@@ -25,6 +25,8 @@ class EzABS:
 		self.ctr = 0
 
 	def on_message(self, ws, message):
+		print("Connected")
+		print(message)
 
 	def on_error(self, ws, error):
 		print(error)
