@@ -32,22 +32,23 @@ class App:
 	def enroll(self, id, ws):
 		confirmation = self.sensor.startEnrollment()
 
+	def pressedFinger():
+		self.sensor.LED(True)
+		sleep(1)
+		self.sensor.LED(False)
+
 
 if __name__ == '__main__':
-	App()
+	app = App()
 
 	GPIO.setmode(GPIO.BCM)
-	INPUT_PIN2 = 18
+	PIN = 18
 
-	GPIO.setup(INPUT_PIN2, GPIO.IN)
+	GPIO.setup(PIN, GPIO.IN)
 
-	def inputLow(channel):
-		print(channel)
-		print('0')
-
-	GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow);
+	GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger);
 
 	while True:
-		print('3.3')
+		print('AFK')
 		sleep(1)
 
