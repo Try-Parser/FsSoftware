@@ -9,7 +9,7 @@ class EzABS:
 	def  __init__(self):
 		websocket.enableTrace(True)
 		self.ws = websocket.WebSocketApp(
-			"ws://192.168.0.101:8080", 
+			"ws://192.168.0.100:8080", 
 			on_message = self.on_message, 
 			on_error = self.on_error, 
 			on_close = self.on_close,
