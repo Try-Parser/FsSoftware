@@ -55,10 +55,8 @@ class App:
 		print(response)
 
 	def pressedFinger(self, channel):
-		if self.enrollment and enrollment >= 3: 
-			return self.enroll()
-		else:
-			return {'nothing: aw'}
+		if self.enrollment and self.enrollmentCounter >= 3:
+			self.switch(self.enrollmentCounter)
 
 		self.sensor.LED(True)
 		sleep(1)
