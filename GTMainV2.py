@@ -1,6 +1,6 @@
 from GTSensor import GTSensor
 from GTEnum import GT521F5
-import time
+from time import sleep 
 import base64
 import json
 import threading
@@ -15,7 +15,7 @@ class App:
 		print ("baudrate :" + str(baudrateResult));
 		print ("Setting is done testing for LED lights")
 		self.sensor.LED(True)
-		time.sleep(0.5)
+		sleep(1)
 		self.sensor.LED(False)
 
 	def getId(self):
