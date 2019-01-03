@@ -25,6 +25,9 @@ class EzABS:
 		self.sth = []
 		self.ctr = 0
 
+		wss = threading.Thread(target=self.ws.run_forever)
+		wss.start()
+
 	def on_message(self, ws, message):
 		print("Connected")
 		print(message)
