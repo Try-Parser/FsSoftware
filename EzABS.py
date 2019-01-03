@@ -29,12 +29,12 @@ class EzABS:
 		wss = threading.Thread(target=self.ws.run_forever)
 		wss.start()
 
-	def switch(self, index, args) :
+	def switch(self, index, args):
 		switcher = {
-			"NU_REG": setEnrollment
+			"NU_REG": self.app.setEnrollment(args)
 		}
 
-		return switcher[index](args)
+		return switcher.get(index, "Invalid cmd")
 
 	def on_message(self, ws, message):
 		print("Connected")
