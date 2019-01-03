@@ -27,7 +27,7 @@ class App:
 			resp = self.sensor.checkEnrolled(id)
 			print(resp);
 
-			if GT521F5.ERRORSalue[check_id["Parameter"]] is 'NACK_IS_NOT_USED':
+			if GT521F5.ERRORS.value[check_id["Parameter"]] is 'NACK_IS_NOT_USED':
 				break
 			
 
