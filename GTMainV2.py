@@ -3,9 +3,6 @@ from GTEnum import GT521F5
 from time import sleep 
 import base64
 import json
-import threading
-import RPi.GPIO as GPIO
-
 
 class App:
 	def __init__(self):
@@ -60,6 +57,8 @@ class App:
 	def pressedFinger(self, channel):
 		if self.enrollment and enrollment >= 3: 
 			return self.enroll()
+		else:
+			return {'nothing: aw'}
 
 		self.sensor.LED(True)
 		sleep(1)
@@ -68,12 +67,7 @@ class App:
 # if __name__ == '__main__':
 # 	app = App()
 
-# 	GPIO.setmode(GPIO.BCM)
-# 	PIN = 18
-
-# 	GPIO.setup(PIN, GPIO.IN)
-
-# 	GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger);
+;
 
 # 	while True:
 # 		print('AFK')

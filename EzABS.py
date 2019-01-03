@@ -4,6 +4,7 @@ from GTMainV2 import App
 import threading
 import time
 import uuid
+import RPi.GPIO as GPIO
 
 class EzABS:
 	def  __init__(self):
@@ -51,6 +52,12 @@ class EzABS:
 
 	def on_open(self, ws):
 		print("### Socket Open ###") 
+ 		GPIO.setmode(GPIO.BCM)
+ 		PIN = 18
+
+ 		GPIO.setup(PIN, GPIO.IN)
+
+	 	GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger)
 
 
 if __name__ == '__main__':
