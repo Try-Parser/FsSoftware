@@ -6,6 +6,7 @@ import json
 import threading
 import RPi.GPIO as GPIO
 
+
 class App:
 	def __init__(self):
 		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
@@ -30,7 +31,10 @@ class App:
 			
 
 	def enroll(self, id, ws):
-		confirmation = self.sensor.startEnrollment()
+		confirmed = self.sensor.startEnrollment()
+		if confirmed["ACK"]:
+			self.sensor.LED(True)
+
 
 	def pressedFinger(self, channel):
 		self.sensor.LED(True)
