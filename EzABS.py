@@ -52,13 +52,11 @@ class EzABS:
 
 	def on_open(self, ws):
 		print("### Socket Open ###")
+
 		GPIO.setmode(GPIO.BCM)
- 		PIN = 18
-
- 		GPIO.setup(PIN, GPIO.IN)
-
-	 	GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger)
-
+		PIN = 18
+		GPIO.setup(PIN, GPIO.IN)
+		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger)
 
 if __name__ == '__main__':
 	EzABS()
