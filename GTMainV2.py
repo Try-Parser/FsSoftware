@@ -32,7 +32,7 @@ class App:
 	def enroll(self, id, ws):
 		confirmation = self.sensor.startEnrollment()
 
-	def pressedFinger(self):
+	def pressedFinger(self, channel):
 		self.sensor.LED(True)
 		sleep(1)
 		self.sensor.LED(False)
