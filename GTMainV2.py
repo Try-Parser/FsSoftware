@@ -4,7 +4,7 @@ import time
 import base64
 import json
 import threading
-
+import RPi.GPIO as GPIO
 
 class App:
 	def __init__(self):
@@ -18,8 +18,6 @@ class App:
 		time.sleep(0.5)
 		self.sensor.LED(False)
 
-		self.getId();	
-
 	def getId(self):
 		id = 0;
 
@@ -27,7 +25,7 @@ class App:
 			resp = self.sensor.checkEnrolled(id)
 			print(resp);
 
-			if GT521F5.ERRORS.value[check_id["Parameter"]] is 'NACK_IS_NOT_USED':
+			if GT521F5.ERRORS.value[resp["Parameter"]] is not 'NACK_IS_NOT_USED':
 				break
 			
 
@@ -37,3 +35,19 @@ class App:
 
 if __name__ == '__main__':
 	App()
+
+	GPIO.setmode(GPIO.BCM)
+	INPUT_PIN2 = 18
+
+	GPIO.setup(INPUT_PIN2, GPIO.IN)
+
+	def inputLow(channel):
+		print(channel)
+		print('0')
+
+	GPIO.add_event_detect(INPUT_PIN2, GPIO.FALLING, callback=inputLow);
+
+	while True:
+		print('3.3')
+		sleep(1)
+
