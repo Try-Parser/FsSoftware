@@ -31,10 +31,10 @@ class EzABS:
 
 	def switch(self, index, args) :
 		switcher = {
-			"NU_REG": setEnrollment(args)
+			"NU_REG": setEnrollment
 		}
 
-		return switcher.get(index, "Invalid cmd")
+		return switcher[index](args)
 
 	def on_message(self, ws, message):
 		print("Connected")
