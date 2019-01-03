@@ -28,7 +28,7 @@ class App:
 		self.userId = args["userId"]
 
 	def getId(self):
-		id = 0;
+		id = 0
 
 		while True and id <= 2999 :
 			resp = self.sensor.checkEnrolled(id)
@@ -63,13 +63,3 @@ class App:
 		self.sensor.LED(True)
 		sleep(1)
 		self.sensor.LED(False)
-
-# if __name__ == '__main__':
-# 	app = App()
-
-;
-
-# 	while True:
-# 		print('AFK')
-# 		sleep(1)
-
