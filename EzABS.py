@@ -13,7 +13,10 @@ class EzABS:
 			on_message = self.on_message, 
 			on_error = self.on_error, 
 			on_close = self.on_close,
-			header = {'type:sensor', 'mac_address:'+str(hex(uuid.getnode()))})
+			header = {
+				'type:sensor', 
+				'mac_address:'+str(hex(uuid.getnode()))
+		})
 
 		self.app = App()
 

@@ -42,17 +42,17 @@ class App:
 		self.sensor.LED(False)
 
 
-if __name__ == '__main__':
-	app = App()
+# if __name__ == '__main__':
+# 	app = App()
 
-	GPIO.setmode(GPIO.BCM)
-	PIN = 18
+# 	GPIO.setmode(GPIO.BCM)
+# 	PIN = 18
 
-	GPIO.setup(PIN, GPIO.IN)
+# 	GPIO.setup(PIN, GPIO.IN)
 
-	GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger);
+# 	GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger);
 
-	while True:
-		print('AFK')
-		sleep(1)
+# 	while True:
+# 		print('AFK')
+# 		sleep(1)
 
