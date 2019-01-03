@@ -10,6 +10,13 @@ import RPi.GPIO as GPIO
 class App:
 	def __init__(self):
 		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
+		
+		self.enrollment = False
+		self.enrollmentCounter = 0
+
+		self.userId = ""
+		self.enrollmentCandidate = 0
+		self.cancelEnroll = False
 
 		print ("Setting baudrate from 9600 to 57600")
 		baudrateResult = self.sensor.setBaudrate(57600)
@@ -19,6 +26,10 @@ class App:
 		sleep(1)
 		self.sensor.LED(False)
 
+	def setEnrollment(self, args):
+		self.enrollment = True
+		self.userId = args["userId"]
+
 	def getId(self):
 		id = 0;
 
@@ -27,20 +38,32 @@ class App:
 			print(resp);
 
 			if GT521F5.ERRORS.value[resp["Parameter"]] is not 'NACK_IS_NOT_USED':
-				break
-			
+				break			
 
-	def enroll(self, id, ws):
+	def enroll(self):
 		confirmed = self.sensor.startEnrollment()
 		if confirmed["ACK"]:
 			self.sensor.LED(True)
 
+	def switch(self, enrollmentIndex):
+		switcher = {
+			0: self.sensor.startEnrollment(self.enrollmentCandidate),
+			1: self.sensor.enrollmentFirst(),
+			2: self.sensor.enrollmentSecond(),
+			3: self.sensor.enrollmentThird()
+		}
+
+		response = switcher.get(index, "Invalid index")
+
+		print(response)
 
 	def pressedFinger(self, channel):
+		if self.enrollment and enrollment >= 3: 
+			return self.enroll()
+
 		self.sensor.LED(True)
 		sleep(1)
 		self.sensor.LED(False)
-
 
 # if __name__ == '__main__':
 # 	app = App()
