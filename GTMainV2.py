@@ -87,10 +87,10 @@ class App:
 		else:
 			return str(number)
 
-	def deleteSingleTemplate(self, id):
-		response = self.sensor.rmById(id)
+	def deleteSingleTemplate(self, sensorId):
+		response = self.sensor.rmById(sensorId)
 		print(response)
-		
+
 	def saveTemplate(self, template, index):
 		response = self.sensor.setTemplate(template, index)
 		print(response)
