@@ -53,7 +53,7 @@ class EzABS:
 		GPIO.setmode(GPIO.BCM)
 		PIN = 18
 		GPIO.setup(PIN, GPIO.IN)
-		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger)
+		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=self.app.pressedFinger)
 
 
 if __name__ == '__main__':
