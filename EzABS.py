@@ -5,6 +5,7 @@ import threading
 import time
 import uuid
 import RPi.GPIO as GPIO
+import base64
 
 class EzABS:
 	def  __init__(self):
