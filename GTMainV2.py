@@ -51,6 +51,7 @@ class App:
 
 	def switch(self, enrollmentIndex):
 		print("enrollment index: " + str(enrollmentIndex))
+		sleep(1)
 		
 		if enrollmentIndex is 0:
 			print("candidate_id : " + str(self.enrollmentCandidate))
