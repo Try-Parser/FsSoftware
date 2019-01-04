@@ -6,6 +6,7 @@ import time
 import uuid
 import RPi.GPIO as GPIO
 import base64
+import yaml
 
 class EzABS:
 	def  __init__(self):
@@ -56,7 +57,7 @@ class EzABS:
 	def on_message(self, ws, message):
 		print("Connected")
 		print(message)
-		request = json.loads(message)
+		request = yaml.load(message)
 		self.switch(request["cmd"], request)
 
 	def on_error(self, ws, error):
