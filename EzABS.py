@@ -30,18 +30,17 @@ class EzABS:
 		wss.start()
 
 	def switch(self, index, args) :
-		switcher = {
-			"NU_REG": self.app.setEnrollment(args),
-			"CU_REG": self.app.cancelEnrollment()
-		}
-
-		return switcher.get(index, "Invalid cmd")
+		
+		if index is	"NU_REG": 
+			self.app.setEnrollment(args),
+		elif index is "CU_REG": 
+			self.app.cancelEnrollment()
 
 	def on_message(self, ws, message):
 		print("Connected")
 		request = json.loads(message)
 
-		response = self.switch(request["cmd"], request)
+		self.switch(request["cmd"], request)
 
 		print(message)
 
