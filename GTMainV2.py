@@ -37,6 +37,8 @@ class App:
 			if resp["Parameter"] is 'NACK_IS_NOT_USED':
 				self.enrollmentCandidate = candidate_id
 				break;
+			else:
+				candidate_id += 1
 
 	def __capture_the_lights__(self):
 	        if self.sensor.senseFinger()[0]['Parameter'] == 0:
