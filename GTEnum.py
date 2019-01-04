@@ -49,7 +49,7 @@ class GT521F5(Enum):
     SECOND_ENROLL              = 0x24
     THIRD_MATCH_SAVE           = 0x25
 
-    DELETE_FP_ID               = 40
+    DELETE_FP_ID               = 0x40
     DELETE_FP_ALL              = 0x41
 
     VERIFICATION               = 0x50
