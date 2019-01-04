@@ -28,7 +28,7 @@ class App:
 		self.userId = args["userId"]
 
 	def getId(self):
-		candidate_id = 1
+		candidate_id = 0
 
 		while True and candidate_id <= 2999 :
 			resp = self.sensor.checkEnrolled(candidate_id)
@@ -48,6 +48,7 @@ class App:
 	                        return True
 
 	def switch(self, enrollmentIndex):
+		print("enrollment index: " + str(enrollmentIndex))
 		switcher = {
 			0: self.sensor.startEnrollment(self.enrollmentCandidate),
 			1: self.sensor.enrollmentFirst(),
@@ -61,10 +62,10 @@ class App:
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
-		print(self.enrollmentCounter)
 		if self.enrollment and self.enrollmentCounter <= 3:
 			if self.enrollmentCounter is 0:
 				self.getId()
+			print(self.enrollmentCounter)
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 			if response["ACK"]:
