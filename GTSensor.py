@@ -28,7 +28,7 @@ class GTSensor:
 
 	def writePacket(self, cmd, param):
 		print(self.address)
-		print(self.param)
+		print(param)
 		print(cmd)
 		s = struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, param, cmd)
 		print(s)
