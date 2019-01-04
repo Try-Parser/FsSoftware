@@ -59,10 +59,10 @@ class EzABS:
 		print(message)
 
 		request = json.loads(message)
-		
+
 		if "cmd" not in request:
 			requestCmd = "Templates"
-		else
+		else:
 			requestCmd = request["cmd"]
 
 		self.switch(requestCmd, request)
