@@ -126,8 +126,11 @@ class App:
 					if self.cancelEnroll:
 						break
 
-				self.enrollmentCounter += 1
 				print(self.enrollmentCounter)
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Step '+ str(self.enrollmentCounter)+ '" , "success": "true", "code":"104" }'
+				self.socket.send(preparedPayLoad)
+
+				self.enrollmentCounter += 1
 
 				if self.enrollmentCounter is 4:
 					templateResponse = self.switch(self.enrollmentCounter)
@@ -149,7 +152,8 @@ class App:
 				self.socket.send(preparedPayLoad)
 		else:
 			now = datetime.datetime.now()
-
+			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Searching", "success": "true", "code":"103" }'
+			self.socket.send(preparedPayLoad)
 			self.sensor.LED(True)
 			captured = self.__capture_the_lights__()
 
