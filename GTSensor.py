@@ -27,12 +27,7 @@ class GTSensor:
 			exit(1)
 
 	def writePacket(self, cmd, param):
-		print("Addres: " + str(self.address))
-		print("parameter "+str(param))
-		print("command" + str(cmd))
-		s = struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, param, cmd)
-		print(s)
-		packet = bytearray(s)
+		packet = bytearray(struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, param, cmd))
 		checksum = sum(packet)
 		packet += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
 
@@ -195,7 +190,7 @@ class GTSensor:
 	# Deletion -----------------------------------------------------------------------------
 
 	def rmById(self, templateID):
-		if self.writePacket(0x40, templateID):
+		if self.writePacket(GT521F5.DELETE_FP_ID.value, templateID):
 			return self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet.")

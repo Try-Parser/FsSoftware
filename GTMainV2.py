@@ -88,7 +88,6 @@ class App:
 			return str(number)
 
 	def deleteSingleTemplate(self, sensorId):
-		print(sensorId)
 		response = self.sensor.rmById(sensorId)
 		print(response)
 
