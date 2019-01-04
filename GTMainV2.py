@@ -28,14 +28,15 @@ class App:
 		self.userId = args["userId"]
 
 	def getId(self):
-		id = 0
+		candidate_id = 0
 
 		while True and id <= 2999 :
-			resp = self.sensor.checkEnrolled(id)
+			resp = self.sensor.checkEnrolled(candidate_id)
 			print(resp);
 
 			if GT521F5.ERRORS.value[resp["Parameter"]] is not 'NACK_IS_NOT_USED':
-				break			
+				self.enrollmentCandidate = candidate_id
+				break;
 
 	def __capture_the_lights__(self):
 	        if self.sensor.senseFinger()[0]['Parameter'] == 0:
@@ -61,6 +62,7 @@ class App:
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
 		if self.enrollment and self.enrollmentCounter <= 3:
+			self.getId()
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 			if response["ACK"]:
@@ -70,6 +72,6 @@ class App:
 						break
 				self.enrollmentCounter += 1
 				self.sensor.LED(False)
-		else:
-			self.enrollmentCounter = 0
-			self.enrollment = False
+
+		self.enrollmentCounter = 0
+		self.enrollment = False
