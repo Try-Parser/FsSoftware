@@ -34,6 +34,8 @@ class App:
 		self.enrollment = True
 		print(self.enrollment)
 		self.userId = args["userId"]
+		self.getId()
+		sleep(1)
 		return self.sensor.startEnrollment(self.enrollmentCandidate)
 
 	def cancelEnrollment(self):
@@ -98,11 +100,6 @@ class App:
 		print(self.enrollment)
 
 		if self.enrollment and self.enrollmentCounter <= 3:
-
-			if self.enrollmentCounter is 0:
-				self.getId()
-				print(self.enrollmentCandidate)
-
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 
