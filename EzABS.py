@@ -31,10 +31,10 @@ class EzABS:
 
 	def switch(self, index, args):
 		if index is "NU_REG": 
-			return self.app.setEnrollment(args)
+			self.app.setEnrollment(args)
 		elif index is "CU_REG":
 			self.app.cancelEnroll = True
-			return "Registration Cancelled"
+			print("Registration Cancelled")
 
 	def on_message(self, ws, message):
 		print("Connected")
