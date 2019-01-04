@@ -170,6 +170,7 @@ class GTSensor:
 			raise RuntimeError("Couldn't send packet.")
 
 	def enrollmentSecond(self):
+		print("second")
 		if self.writePacket(GT521F5.SECOND_ENROLL.value, GT521F5.DEFAULT.value):
 			return self.receivedPacket()
 		else:
