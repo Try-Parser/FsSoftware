@@ -107,7 +107,7 @@ class App:
 				if resp["ACK"]:
 					self.enrollmentCounter += 1
 				print(self.enrollmentCandidate)
-
+			sleep(1)
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 

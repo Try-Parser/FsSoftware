@@ -33,8 +33,7 @@ class EzABS:
 
 	def switch(self, cmd, args) :
 		if cmd == "NU_REG": 
-			response = self.app.setEnrollment(args)
-			print(response)
+			self.app.setEnrollment(args)
 		elif cmd == "CU_REG":
 			self.app.cancelEnrollment()
 		elif cmd == "DB_RESET":
