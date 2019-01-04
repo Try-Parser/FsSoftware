@@ -49,6 +49,8 @@ class App:
 
 	def switch(self, enrollmentIndex):
 		print("enrollment index: " + str(enrollmentIndex))
+		
+		
 		switcher = {
 			0: self.sensor.startEnrollment(self.enrollmentCandidate),
 			1: self.sensor.enrollmentFirst(),
