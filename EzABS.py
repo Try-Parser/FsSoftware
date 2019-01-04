@@ -29,12 +29,12 @@ class EzABS:
 		wss = threading.Thread(target=self.ws.run_forever)
 		wss.start()
 
-	def switch(self, index, args) :
+	def switch(self, cmd, args) :
 		
-		if index ==	"NU_REG": 
+		if cmd == "NU_REG": 
 			print("Im in NU")
-			self.app.setEnrollment(args),
-		elif index == "CU_REG":
+			self.app.setEnrollment(args)
+		elif cmd == "CU_REG":
 			print("Im in CU") 
 			self.app.cancelEnrollment()
 		else:
