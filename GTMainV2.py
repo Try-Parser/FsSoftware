@@ -88,7 +88,7 @@ class App:
 			return str(number)
 
 	def deleteSingleTemplate(self, sensorId):
-		response = self.sensor.rmById(sensorId)
+		response = self.sensor.rmById(int(sensorId))
 		print(response)
 
 	def saveTemplate(self, template, index):
