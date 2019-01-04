@@ -95,7 +95,7 @@ class App:
 		else:
 			success = False
 			code = 901
-		preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response +'", "code": "'+ code +'" }'
+		preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response["Parameter"] +'", "code": "'+ code +'" }'
 		self.socket.send(preparedPayload)
 
 	def saveTemplate(self, template, index):
