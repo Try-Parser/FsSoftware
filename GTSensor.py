@@ -195,7 +195,7 @@ class GTSensor:
 	# Deletion -----------------------------------------------------------------------------
 
 	def rmById(self, templateID):
-		if self.writePacket(GT521F5.DELETE_FP_ID.value, templateID):
+		if self.writePacket(0x40, templateID):
 			return self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet.")
