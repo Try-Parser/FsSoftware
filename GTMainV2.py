@@ -77,12 +77,13 @@ class App:
 				while not self.__capture_the_lights__():
 					if self.cancelEnroll:
 						break
-				self.enrollmentCounter += 1
 				self.sensor.LED(False)
 				print(self.enrollmentCounter)
 				if self.enrollmentCounter is 3:
 					print("Template result from enrollment")
-					print(self.switch(self.enrollmentCounter))
+					print(self.switch(4))
+				self.enrollmentCounter += 1
+
 		else:
 			self.enrollmentCounter = 0
 			self.enrollment = False
