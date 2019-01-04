@@ -79,6 +79,12 @@ class App:
 				self.enrollmentCounter += 1
 				print(self.enrollmentCounter)
 				self.sensor.LED(False)
+				if self.enrollmentCounter is 4:
+					print(self.switch(self.enrollmentCounter))
+			elif not response["ACK"] and response["Parameter"] is 0:
+				print("Fingerprint is used")
+			else:
+				print(response["Parameter"])
 		else:
 			self.enrollmentCounter = 0
 			self.enrollment = False
