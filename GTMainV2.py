@@ -125,7 +125,7 @@ class App:
 
 			if captured:
 				identify = self.sensor.security()
-				if indentify["ACK"]:
+				if identify["ACK"]:
 					currentDate = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
 					time = str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)
 					preparedPayLoad = '{ "command": "ATTENDANCE", "scannerId": "'+ identify["Parameter"] +'", "dateTime": "'+ currentDate +'", "time": "' + time + '" }'
