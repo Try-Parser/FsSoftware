@@ -64,24 +64,25 @@ class App:
 			return self.sensor.generateTemplateById(self.enrollmentCandidate)
 
 	def pressedFinger(self, channel):
+		print("Fingerpressed.")
+
 		if self.enrollment and self.enrollmentCounter <= 3:
 			if self.enrollmentCounter is 0:
 				self.getId()
+			print(self.enrollmentCounter)
 			response = self.switch(self.enrollmentCounter)
+			print(response)
 			if response["ACK"]:
 				self.sensor.LED(True)
 				while not self.__capture_the_lights__():
 					if self.cancelEnroll:
 						break
+				self.enrollmentCounter += 1
 				self.sensor.LED(False)
 
 				# if self.enrollmentCounter is 3:
-				# 	sleep(1)
 				# 	print("Template result from enrollment")
-				# 	print(self.switch(4))
-
-				self.enrollmentCounter += 1
-
+				# 	print(self.switch(self.enrollmentCounter))
 		else:
 			self.enrollmentCounter = 0
 			self.enrollment = False
