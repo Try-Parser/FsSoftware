@@ -60,7 +60,7 @@ class App:
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
-		if self.enrollment and self.enrollmentCounter >= 3:
+		if self.enrollment and self.enrollmentCounter <= 3:
 			response = self.switch(self.enrollmentCounter)
 			if response["ACK"]:
 				self.sensor.LED(True)
