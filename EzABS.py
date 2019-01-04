@@ -54,6 +54,8 @@ class EzABS:
 
 	def on_message(self, ws, message):
 		print("Connected")
+		print(message)
+		print(message["body"])
 		request = json.loads(message)
 
 		self.switch(request["cmd"], request)
