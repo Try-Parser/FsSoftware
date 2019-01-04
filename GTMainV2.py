@@ -128,8 +128,10 @@ class App:
 				if identify["ACK"]:
 					currentDate = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
 					time = str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)
-					preparedPayLoad = '{ "command": "ATTENDANCE", "scannerId": "'+ identify["Parameter"] +'", "dateTime": "'+ currentDate +'", "time": "' + time + '" }'
+					preparedPayLoad = '{ "command": "ATTENDANCE", "scannerId": "'+ str(identify["Parameter"]) +'", "dateTime": "'+ currentDate +'", "time": "' + time + '" }'
 					self.socket.send(preparedPayLoad)
+				else:
+					print(identify["Parameter"])
 
 			self.enrollmentCounter = 0
 			self.enrollment = False
