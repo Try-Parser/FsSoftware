@@ -29,17 +29,19 @@ class EzABS:
 		wss = threading.Thread(target=self.ws.run_forever)
 		wss.start()
 
-	def switch(self, index, args):
-		if index is "NU_REG": 
-			self.app.setEnrollment(args)
-		elif index is "CU_REG":
-			self.app.cancelEnroll = True
-			print("Registration Cancelled")
+	def switch(self, index, args) :
+		switcher = {
+			"NU_REG": self.app.setEnrollment(args)
+		}
+
+		return switcher.get(index, "Invalid cmd")
 
 	def on_message(self, ws, message):
 		print("Connected")
 		request = json.loads(message)
+
 		response = self.switch(request["cmd"], request)
+
 		print(message)
 
 	def on_error(self, ws, error):
@@ -53,7 +55,7 @@ class EzABS:
 		GPIO.setmode(GPIO.BCM)
 		PIN = 18
 		GPIO.setup(PIN, GPIO.IN)
-		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=self.app.pressedFinger)
+		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger)
 
 
 if __name__ == '__main__':
