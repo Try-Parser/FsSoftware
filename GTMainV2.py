@@ -53,6 +53,7 @@ class App:
 		print("enrollment index: " + str(enrollmentIndex))
 		
 		if enrollmentIndex is 0:
+			print("candidate_id : " + str(self.enrollmentCandidate))
 			return self.sensor.startEnrollment(self.enrollmentCandidate)
 		elif enrollmentIndex is 1:
 			return self.sensor.enrollmentFirst()
@@ -69,7 +70,6 @@ class App:
 		if self.enrollment and self.enrollmentCounter <= 3:
 			if self.enrollmentCounter is 0:
 				self.getId()
-			print(self.enrollmentCounter)
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 			if response["ACK"]:
@@ -80,10 +80,6 @@ class App:
 				self.enrollmentCounter += 1
 				print(self.enrollmentCounter)
 				self.sensor.LED(False)
-
-				# if self.enrollmentCounter is 3:
-				# 	print("Template result from enrollment")
-				# 	print(self.switch(self.enrollmentCounter))
 		else:
 			self.enrollmentCounter = 0
 			self.enrollment = False
