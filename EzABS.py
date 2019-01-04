@@ -38,6 +38,8 @@ class EzABS:
 			self.app.cancelEnrollment()
 		elif cmd == "DB_RESET":
 			self.reset()
+		elif cmd == "DELETE_TEMP":
+			self.app.deleteSingleTemplate(args["scannerId"])
 		elif cmd == "S_TEMPLATE":
 			if args["message"] == "Templates":
 				body = args["body"]
