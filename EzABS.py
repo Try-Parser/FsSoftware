@@ -58,6 +58,7 @@ class EzABS:
 		print("Connected")
 		print(message)
 		request = yaml.load(message)
+		print("ataya" + message)
 		self.switch(request["cmd"], request)
 
 	def on_error(self, ws, error):
