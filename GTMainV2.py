@@ -34,7 +34,7 @@ class App:
 			resp = self.sensor.checkEnrolled(candidate_id)
 			print(resp);
 
-			if GT521F5.ERRORS.value[resp["Parameter"]] is not 'NACK_IS_NOT_USED':
+			if resp["Parameter"] is not 'NACK_IS_NOT_USED':
 				self.enrollmentCandidate = candidate_id
 				break;
 
