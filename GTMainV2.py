@@ -117,7 +117,7 @@ class App:
 				print(response["Parameter"])
 		else:
 			self.sensor.LED(True)
-			captured = self.__capture_the_lights__():
+			captured = self.__capture_the_lights__()
 
 			if captured:
 				identify = self.sensor.security()
