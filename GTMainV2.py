@@ -37,10 +37,14 @@ class App:
 			if GT521F5.ERRORS.value[resp["Parameter"]] is not 'NACK_IS_NOT_USED':
 				break			
 
-	def enroll(self):
-		confirmed = self.sensor.startEnrollment()
-		if confirmed["ACK"]:
-			self.sensor.LED(True)
+	def __capture_the_lights__(self):
+	        if self.sensor.senseFinger()[0]['Parameter'] == 0:
+	                print ("Capturing Fingerprint")
+	                time.sleep(0.1)
+	                if self.sensor.captureFinger(True)['ACK']:
+	                        print ("Captured")
+	                        self.sensor.LED(False)
+	                        return True
 
 	def switch(self, enrollmentIndex):
 		switcher = {
@@ -50,14 +54,16 @@ class App:
 			3: self.sensor.enrollmentThird()
 		}
 
-		response = switcher.get(index, "Invalid index")
+		response = switcher.get(index, "Invalid Index")
 
-		print(response)
+		return response
 
 	def pressedFinger(self, channel):
 		if self.enrollment and self.enrollmentCounter >= 3:
-			self.switch(self.enrollmentCounter)
-
-		self.sensor.LED(True)
-		sleep(1)
-		self.sensor.LED(False)
+			response = self.switch(self.enrollmentCounter)
+			if response["ACK"]:
+				self.sensor.LED(True)
+				while not self.__capture_the_lights__():
+					if self.cancelEnroll:
+						break
+				self.sensor.LED(False)
