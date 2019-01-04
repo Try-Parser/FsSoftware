@@ -28,6 +28,13 @@ class App:
 		print(self.enrollment)
 		self.userId = args["userId"]
 
+	def cancelEnrollment(self):
+		self.cancelEnroll = True
+		self.enrollment = False
+		self.enrollmentCounter = 0
+		self.userId = ""
+		self.enrollmentCandidate = 0
+
 	def getId(self):
 		candidate_id = 0
 
