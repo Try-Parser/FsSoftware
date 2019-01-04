@@ -30,7 +30,7 @@ class App:
 	def getId(self):
 		candidate_id = 0
 
-		while True and id <= 2999 :
+		while True and candidate_id <= 2999 :
 			resp = self.sensor.checkEnrolled(candidate_id)
 			print(resp);
 
@@ -62,7 +62,8 @@ class App:
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
 		if self.enrollment and self.enrollmentCounter <= 3:
-			self.getId()
+			if self.enrollmentCounter is 0:
+				self.getId()
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 			if response["ACK"]:
