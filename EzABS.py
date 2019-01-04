@@ -57,8 +57,15 @@ class EzABS:
 	def on_message(self, ws, message):
 		print("Connected")
 		print(message)
+
 		request = json.loads(message)
-		self.switch(request["cmd"], request)
+		
+		if "cmd" not in request:
+			requestCmd = "Templates"
+		else
+			requestCmd = request["cmd"]
+
+		self.switch(requestCmd, request)
 
 	def on_error(self, ws, error):
 		print(error)
