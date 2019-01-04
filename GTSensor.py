@@ -27,8 +27,17 @@ class GTSensor:
 			exit(1)
 
 	def writePacket(self, cmd, param):
-		print(bytearray(struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, 1, 64)))
 		packet = bytearray(struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, param, cmd))
+		checksum = sum(packet)
+		packet += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
+
+		result = len(packet) == self.serial.write(packet)
+		self.serial.flush()
+
+		return result
+
+	def writePacket2(self, cmd, param):
+		packet = bytearray(struct.pack(GT521F5.COMM_STRUCT(), 0x55, 0xAA, self.address, 1, 64))
 		checksum = sum(packet)
 		packet += bytearray(struct.pack(GT521F5.CHECK_SUM_STRUCT(), checksum))
 
@@ -191,7 +200,7 @@ class GTSensor:
 	# Deletion -----------------------------------------------------------------------------
 
 	def rmById(self, templateID):
-		if self.writePacket(GT521F5.DELETE_FP_ID.value, templateID):
+		if self.writePacket2(GT521F5.DELETE_FP_ID.value, templateID):
 			return self.receivedPacket()
 		else:
 			raise RuntimeError("Couldn't send packet.")
