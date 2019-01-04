@@ -64,7 +64,7 @@ class App:
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
-
+		print(self.enrollment)
 		if self.enrollment and self.enrollmentCounter <= 3:
 			if self.enrollmentCounter is 0:
 				self.getId()
