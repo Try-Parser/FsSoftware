@@ -78,6 +78,7 @@ class App:
 					if self.cancelEnroll:
 						break
 				self.enrollmentCounter += 1
+				print(self.enrollmentCounter)
 				self.sensor.LED(False)
 
 				# if self.enrollmentCounter is 3:
