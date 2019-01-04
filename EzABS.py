@@ -38,7 +38,7 @@ class EzABS:
 			self.app.cancelEnrollment()
 		elif cmd == "DB_RESET":
 			self.reset()
-		else:
+		elif cmd == "S_TEMPLATE":
 			if args["message"] == "Templates":
 				body = args["body"]
 				if not body["empty"]:
@@ -47,6 +47,7 @@ class EzABS:
 					print(content["print"])
 					# print(ase64.b64decode(content["print"].encode()))
 					# print(body["content"][0])
+		else:
 			print("WTF")
 
 	def reset(self): 
@@ -61,7 +62,7 @@ class EzABS:
 		request = json.loads(message)
 
 		if "cmd" not in request:
-			requestCmd = "Templates"
+			requestCmd = "S_TEMPLATE"
 		else:
 			requestCmd = request["cmd"]
 
