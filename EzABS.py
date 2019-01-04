@@ -30,12 +30,9 @@ class EzABS:
 		wss.start()
 
 	def switch(self, cmd, args) :
-		
 		if cmd == "NU_REG": 
-			print("Im in NU")
 			self.app.setEnrollment(args)
 		elif cmd == "CU_REG":
-			print("Im in CU") 
 			self.app.cancelEnrollment()
 		else:
 			print("WTF")
@@ -56,6 +53,7 @@ class EzABS:
 
 	def on_open(self, ws):
 		print("### Socket Open ###")
+		self.app.setSocket(self.ws)
 		GPIO.setmode(GPIO.BCM)
 		PIN = 18
 		GPIO.setup(PIN, GPIO.IN)

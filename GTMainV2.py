@@ -8,6 +8,8 @@ class App:
 	def __init__(self):
 		self.sensor = GTSensor('/dev/ttyAMA0', timeout=2, baudrate=9600)
 		
+		self.socket = ""
+
 		self.enrollment = False
 		self.enrollmentCounter = 0
 
@@ -22,6 +24,9 @@ class App:
 		self.sensor.LED(True)
 		sleep(1)
 		self.sensor.LED(False)
+
+	def setSocket(self, ws):
+		self.socket = ws
 
 	def setEnrollment(self, args):
 		self.enrollment = True
@@ -73,25 +78,37 @@ class App:
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
 		print(self.enrollment)
+
 		if self.enrollment and self.enrollmentCounter <= 3:
+
 			if self.enrollmentCounter is 0:
 				self.getId()
 				print(self.enrollmentCandidate)
+
 			response = self.switch(self.enrollmentCounter)
 			print(response)
+
 			if response["ACK"]:
 				self.sensor.LED(True)
+
 				while not self.__capture_the_lights__():
 					if self.cancelEnroll:
 						break
+
 				self.enrollmentCounter += 1
 				print(self.enrollmentCounter)
 				self.sensor.LED(False)
+
 				if self.enrollmentCounter is 4:
-					print(self.switch(self.enrollmentCounter))
+					templateResponse = self.switch(self.enrollmentCounter)
+					if templateResponse[0]['ACK']:
+						preparedPayLoad = '{ "command": "W_REGED", "template": "'+ base64.b64encode(templateResponse[1][0]['Data']).decode() +'", "userId":"'+str(self.userId)+'", "sensorId":'+str(self.enrollmentCandidate)+'}'
+						self.socket.send(preparedPayLoad)
 			elif not response["ACK"] and response["Parameter"] is 0:
+
 				print("Fingerprint is used")
 				self.enrollmentCounter += 1
+
 			else:
 				print(response["Parameter"])
 		else:
