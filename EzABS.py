@@ -32,8 +32,10 @@ class EzABS:
 	def switch(self, index, args) :
 		
 		if index is	"NU_REG": 
+			print("Im in NU")
 			self.app.setEnrollment(args),
-		elif index is "CU_REG": 
+		elif index is "CU_REG":
+			print("Im in CU") 
 			self.app.cancelEnrollment()
 
 	def on_message(self, ws, message):
