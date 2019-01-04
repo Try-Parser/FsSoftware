@@ -142,6 +142,7 @@ class App:
 
 			if captured:
 				identify = self.sensor.security()
+				print(identify)
 				if identify["ACK"]:
 					currentDate = self.numberFormat(now.year) + "-" + self.numberFormat(now.month) + "-" + self.numberFormat(now.day)
 					time = self.numberFormat(now.hour) + ":" + self.numberFormat(now.minute) + ":" + self.numberFormat(now.second)
