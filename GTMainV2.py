@@ -104,7 +104,6 @@ class App:
 
 			if response["ACK"]:
 				self.sensor.LED(True)
-
 				while not self.__capture_the_lights__():
 					if self.cancelEnroll:
 						break
@@ -123,7 +122,8 @@ class App:
 				print("Fingerprint is used")
 				self.enrollmentCounter += 1
 
-			else:
+			elif response["ACK"] == "NACK_TURN_ERR":
+				self.cancelEnroll = True
 				print(response["Parameter"])
 		else:
 			now = datetime.datetime.now()
