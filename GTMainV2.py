@@ -28,7 +28,7 @@ class App:
 		self.userId = args["userId"]
 
 	def getId(self):
-		candidate_id = 0
+		candidate_id = 1
 
 		while True and candidate_id <= 2999 :
 			resp = self.sensor.checkEnrolled(candidate_id)
