@@ -103,9 +103,9 @@ class App:
 
 			if self.enrollmentCounter is 0:
 				self.getId()
-				resp = self.switch(self.enrollmentCounter)
-				if resp["ACK"]:
-					self.enrollmentCounter += 1
+				# resp = self.switch(self.enrollmentCounter)
+				# if resp["ACK"]:
+				# 	self.enrollmentCounter += 1
 				print(self.enrollmentCandidate)
 			sleep(1)
 			response = self.switch(self.enrollmentCounter)
