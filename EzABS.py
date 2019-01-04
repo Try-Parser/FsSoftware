@@ -48,9 +48,11 @@ class EzABS:
 					response = self.app.saveTemplate(base64.b64decode(content["print"].encode()), content["scannerId"])
 					if response == "successful":
 						success = True
+						code = 102
 					else:
 						success = False
-					preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response +'", "code": "104" }'
+						code = 906
+					preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response +'", "code": "'+ code +'" }'
 					self.ws.send(preparedPayload)
 		else:
 			print("WTF")

@@ -89,7 +89,14 @@ class App:
 
 	def deleteSingleTemplate(self, sensorId):
 		response = self.sensor.rmById(int(sensorId))
-		print(response)
+		if response["ACK"]:
+			success = True
+			code = 101
+		else:
+			success = False
+			code = 901
+		preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response +'", "code": "'+ code +'" }'
+		self.socket.send(preparedPayload)
 
 	def saveTemplate(self, template, index):
 		response = self.sensor.setTemplate(template, index)
@@ -131,14 +138,14 @@ class App:
 			elif not response["ACK"] and response["Parameter"] is 0:
 				print("Fingerprint is used")
 				self.enrollmentCounter += 1
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Fingerprint is in used.", "success": "false", "code":"106" }'
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Fingerprint is in used.", "success": "false", "code":"902" }'
 				self.socket.send(preparedPayLoad)
 			else:
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ response["Parameter"]+' Sensor Error Restarting enrollment process.", "success": "false", "code":"107" }'
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ response["Parameter"]+' Sensor Error Restarting enrollment process.", "success": "false", "code":"903" }'
 				self.socket.send(preparedPayLoad)
 				self.enrollment = True
 				self.enrollmentCounter = 0
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Enrollment starts from the begining.", "success": "false", "code":"108" }'
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Enrollment starts from the begining.", "success": "false", "code":"904" }'
 				self.socket.send(preparedPayLoad)
 		else:
 			now = datetime.datetime.now()
@@ -156,7 +163,7 @@ class App:
 					self.socket.send(preparedPayLoad)
 				else:
 					if identify["Parameter"] == "NACK_IDENTIFY_FAILED":
-						preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "false", "message": "Unindentified finger", "code": "105" }'
+						preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "false", "message": "Unindentified finger", "code": "905" }'
 						self.socket.send(preparedPayLoad)
 					
 					print(identify["Parameter"])
