@@ -30,19 +30,16 @@ class EzABS:
 		wss.start()
 
 	def switch(self, index, args):
-
-		if index is "NU_REG":
+		if index is "NU_REG": 
 			return self.app.setEnrollment(args)
 		elif index is "CU_REG":
 			self.app.cancelEnroll = True
-			return "Canceled"		
+			return "Registration Cancelled"
 
 	def on_message(self, ws, message):
 		print("Connected")
 		request = json.loads(message)
-
 		response = self.switch(request["cmd"], request)
-
 		print(message)
 
 	def on_error(self, ws, error):
@@ -53,11 +50,11 @@ class EzABS:
 
 	def on_open(self, ws):
 		print("### Socket Open ###")
-
 		GPIO.setmode(GPIO.BCM)
 		PIN = 18
 		GPIO.setup(PIN, GPIO.IN)
-		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=self.app.pressedFinger)
+		GPIO.add_event_detect(PIN, GPIO.FALLING, callback=app.pressedFinger)
+
 
 if __name__ == '__main__':
 	EzABS()
