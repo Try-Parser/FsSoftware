@@ -83,6 +83,7 @@ class App:
 					print(self.switch(self.enrollmentCounter))
 			elif not response["ACK"] and response["Parameter"] is 0:
 				print("Fingerprint is used")
+				self.enrollmentCounter += 1
 			else:
 				print(response["Parameter"])
 		else:
