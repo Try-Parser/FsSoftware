@@ -79,7 +79,8 @@ class App:
 						break
 				self.enrollmentCounter += 1
 				self.sensor.LED(False)
-				if self.enrollmentCounter is 4:
+				print(self.enrollmentCounter)
+				if self.enrollmentCounter is 3:
 					print("Template result from enrollment")
 					print(self.switch(self.enrollmentCounter))
 		else:
