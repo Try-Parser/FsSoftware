@@ -62,9 +62,11 @@ class App:
 		print("Fingerpressed.")
 		if self.enrollment and self.enrollmentCounter <= 3:
 			response = self.switch(self.enrollmentCounter)
+			print(response)
 			if response["ACK"]:
 				self.sensor.LED(True)
 				while not self.__capture_the_lights__():
 					if self.cancelEnroll:
 						break
+				self.enrollmentCounter += 1
 				self.sensor.LED(False)
