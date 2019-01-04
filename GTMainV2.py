@@ -73,6 +73,6 @@ class App:
 						break
 				self.enrollmentCounter += 1
 				self.sensor.LED(False)
-
-		self.enrollmentCounter = 0
-		self.enrollment = False
+		else:
+			self.enrollmentCounter = 0
+			self.enrollment = False
