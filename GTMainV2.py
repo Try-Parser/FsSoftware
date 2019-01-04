@@ -50,17 +50,14 @@ class App:
 	def switch(self, enrollmentIndex):
 		print("enrollment index: " + str(enrollmentIndex))
 		
-		
-		switcher = {
-			0: self.sensor.startEnrollment(self.enrollmentCandidate),
-			1: self.sensor.enrollmentFirst(),
-			2: self.sensor.enrollmentSecond(),
-			3: self.sensor.enrollmentThird()
-		}
-
-		response = switcher.get(enrollmentIndex, "Invalid Index")
-
-		return response
+		if enrollmentIndex is 0:
+			return self.sensor.startEnrollment(self.enrollmentCandidate)
+		elif enrollmentIndex is 1:
+			return self.sensor.enrollmentFirst()
+		elif enrollmentIndex is 2:
+			return self.sensor.enrollmentSecond()
+		elif enrollmentIndex is 3:
+			return self.sensor.enrollmentThird()
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
