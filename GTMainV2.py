@@ -75,10 +75,10 @@ class App:
 						break
 				self.sensor.LED(False)
 
-				if self.enrollmentCounter is 3:
-					sleep(1)
-					print("Template result from enrollment")
-					print(self.switch(4))
+				# if self.enrollmentCounter is 3:
+				# 	sleep(1)
+				# 	print("Template result from enrollment")
+				# 	print(self.switch(4))
 
 				self.enrollmentCounter += 1
 
