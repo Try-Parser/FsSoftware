@@ -13,7 +13,7 @@ class App:
 		self.socket = ""
 
 		self.enrollment = False
-		self.enrollmentCounter = 1
+		self.enrollmentCounter = 0
 
 		self.userId = ""
 		self.enrollmentCandidate = 0
@@ -34,10 +34,6 @@ class App:
 		self.enrollment = True
 		print(self.enrollment)
 		self.userId = args["userId"]
-		self.getId()
-		sleep(1)
-		print(self.enrollmentCandidate)
-		return self.sensor.startEnrollment(self.enrollmentCandidate)
 
 	def cancelEnrollment(self):
 		self.cancelEnroll = True
@@ -55,6 +51,8 @@ class App:
 
 		while True and candidate_id <= 2999 :
 			resp = self.sensor.checkEnrolled(candidate_id)
+			print(resp);
+
 			if resp["Parameter"] is 'NACK_IS_NOT_USED':
 				self.enrollmentCandidate = candidate_id
 				break;
@@ -71,7 +69,10 @@ class App:
 	                        return True
 
 	def switch(self, enrollmentIndex):
-		if enrollmentIndex is 1:
+		if enrollmentIndex is 0:
+			print("candidate_id : " + str(self.enrollmentCandidate))
+			return self.sensor.startEnrollment(self.enrollmentCandidate)
+		elif enrollmentIndex is 1:
 			return self.sensor.enrollmentFirst()
 		elif enrollmentIndex is 2:
 			return self.sensor.enrollmentSecond()
@@ -99,11 +100,20 @@ class App:
 		print(self.enrollment)
 
 		if self.enrollment and self.enrollmentCounter <= 3:
+
+			if self.enrollmentCounter is 0:
+				self.getId()
+				resp = self.switch(self.enrollmentCounter)
+				if resp["ACK"]:
+					self.enrollmentCounter += 1
+				print(self.enrollmentCandidate)
+
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 
 			if response["ACK"]:
 				self.sensor.LED(True)
+
 				while not self.__capture_the_lights__():
 					if self.cancelEnroll:
 						break
@@ -122,8 +132,7 @@ class App:
 				print("Fingerprint is used")
 				self.enrollmentCounter += 1
 
-			elif response["ACK"] == "NACK_TURN_ERR":
-				self.cancelEnroll = True
+			else:
 				print(response["Parameter"])
 		else:
 			now = datetime.datetime.now()
