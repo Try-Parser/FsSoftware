@@ -45,7 +45,7 @@ class EzABS:
 					content = body["content"][0]
 					print(content["scannerId"])
 					print(content["print"])
-					print(ase64.b64decode(content["print"].encode()))
+					print(base64.b64decode(content["print"].encode()))
 					# print(body["content"][0])
 		else:
 			print("WTF")
