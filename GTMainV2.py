@@ -55,8 +55,6 @@ class App:
 
 		while True and candidate_id <= 2999 :
 			resp = self.sensor.checkEnrolled(candidate_id)
-			print(resp);
-
 			if resp["Parameter"] is 'NACK_IS_NOT_USED':
 				self.enrollmentCandidate = candidate_id
 				break;
