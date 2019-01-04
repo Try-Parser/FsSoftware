@@ -31,7 +31,8 @@ class EzABS:
 
 	def switch(self, index, args) :
 		switcher = {
-			"NU_REG": self.app.setEnrollment(args)
+			"NU_REG": self.app.setEnrollment(args),
+			"CU_REG": self.app.cancelEnrollment()
 		}
 
 		return switcher.get(index, "Invalid cmd")
