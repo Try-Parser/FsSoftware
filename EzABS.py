@@ -57,7 +57,7 @@ class EzABS:
 	def on_message(self, ws, message):
 		print("Connected")
 		print(message)
-		request = yaml.load(message)
+		request = json.loads(message)
 		print("ataya" + message)
 		self.switch(request["cmd"], request)
 
