@@ -34,9 +34,8 @@ class EzABS:
 		if index is "NU_REG":
 			return self.app.setEnrollment(args)
 		elif index is "CU_REG":
-			self.app.cancelEnroll = True		
-
-		return switcher.get(index, "Invalid cmd")
+			self.app.cancelEnroll = True
+			return "Canceled"		
 
 	def on_message(self, ws, message):
 		print("Connected")
