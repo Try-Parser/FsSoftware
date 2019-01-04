@@ -36,6 +36,7 @@ class App:
 		self.userId = args["userId"]
 		self.getId()
 		sleep(1)
+		print(self.enrollmentCandidate)
 		return self.sensor.startEnrollment(self.enrollmentCandidate)
 
 	def cancelEnrollment(self):
