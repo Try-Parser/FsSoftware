@@ -81,6 +81,12 @@ class App:
 		elif enrollmentIndex is 4:
 			return self.sensor.generateTemplateById(self.enrollmentCandidate)
 
+	def numberFormat(self, number): 
+		if number < 10:
+			return "0"+str(number)
+		else:
+			return str(number)
+
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
 		print(self.enrollment)
@@ -126,8 +132,8 @@ class App:
 			if captured:
 				identify = self.sensor.security()
 				if identify["ACK"]:
-					currentDate = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
-					time = str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)
+					currentDate = self.numberFormat(now.year) + "-" + self.numberFormat(now.month) + "-" + self.numberFormat(now.day)
+					time = self.numberFormat(now.hour) + ":" + self.numberFormat(now.minute) + ":" + self.numberFormat(now.second)
 					preparedPayLoad = '{ "command": "ATTENDANCE", "scannerId": "'+ str(identify["Parameter"]) +'", "dateTime": "'+ currentDate +'", "time": "' + time + '" }'
 					self.socket.send(preparedPayLoad)
 				else:
