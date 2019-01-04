@@ -37,6 +37,8 @@ class EzABS:
 		elif index is "CU_REG":
 			print("Im in CU") 
 			self.app.cancelEnrollment()
+		else:
+			print("WTF")
 
 	def on_message(self, ws, message):
 		print("Connected")
