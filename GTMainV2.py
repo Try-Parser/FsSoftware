@@ -89,3 +89,4 @@ class App:
 		else:
 			self.enrollmentCounter = 0
 			self.enrollment = False
+			self.cancelEnroll = False

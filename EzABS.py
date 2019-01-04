@@ -30,9 +30,11 @@ class EzABS:
 		wss.start()
 
 	def switch(self, index, args):
-		switcher = {
-			"NU_REG": self.app.setEnrollment(args)
-		}
+
+		if index is "NU_REG":
+			return self.app.setEnrollment(args)
+		elif index is "CU_REG":
+			self.app.cancelEnroll = True		
 
 		return switcher.get(index, "Invalid cmd")
 
