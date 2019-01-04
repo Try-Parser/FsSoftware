@@ -34,8 +34,21 @@ class EzABS:
 			self.app.setEnrollment(args)
 		elif cmd == "CU_REG":
 			self.app.cancelEnrollment()
+		elif cmd == "DB_RESET":
+			self.reset()
 		else:
+			if args["message"] == "Templates":
+				body = args["body"]
+				if not body["empty"]:
+					content = body["content"][0]
+					print(content["scannerId"])
+					print(ase64.b64decode(content["print"].encode()))
+					# print(body["content"][0])
 			print("WTF")
+
+	def reset(self): 
+		self.app.clearDb()
+		self.ws.send('{ "cmd": "TP_RESET" }')
 
 	def on_message(self, ws, message):
 		print("Connected")
@@ -54,7 +67,6 @@ class EzABS:
 	def on_open(self, ws):
 		print("### Socket Open ###")
 		self.app.setSocket(self.ws)
-		self.app.clearDb()
 		GPIO.setmode(GPIO.BCM)
 		PIN = 18
 		GPIO.setup(PIN, GPIO.IN)
