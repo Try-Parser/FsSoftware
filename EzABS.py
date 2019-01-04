@@ -49,7 +49,7 @@ class EzABS:
 
 	def reset(self): 
 		self.app.clearDb()
-		self.ws.send('{ "cmd": "TP_RESET" }')
+		self.ws.send('{ "command": "TP_RESET" }')
 
 	def on_message(self, ws, message):
 		print("Connected")
