@@ -54,7 +54,7 @@ class App:
 			3: self.sensor.enrollmentThird()
 		}
 
-		response = switcher.get(index, "Invalid Index")
+		response = switcher.get(enrollmentIndex, "Invalid Index")
 
 		return response
 
