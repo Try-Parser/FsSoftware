@@ -49,6 +49,7 @@ class EzABS:
 			print("WTF")
 
 	def reset(self): 
+		print("Im heere")
 		self.app.clearDb()
 		self.ws.send('{ "command": "TP_RESET" }')
 
