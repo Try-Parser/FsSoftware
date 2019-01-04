@@ -25,6 +25,7 @@ class App:
 
 	def setEnrollment(self, args):
 		self.enrollment = True
+		print(self.enrollment)
 		self.userId = args["userId"]
 
 	def getId(self):
