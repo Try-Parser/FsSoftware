@@ -3,6 +3,8 @@ from GTEnum import GT521F5
 from time import sleep 
 import base64
 import json
+import datetime
+
 
 class App:
 	def __init__(self):
@@ -116,12 +118,18 @@ class App:
 			else:
 				print(response["Parameter"])
 		else:
+			now = datetime.datetime.now()
+
 			self.sensor.LED(True)
 			captured = self.__capture_the_lights__()
 
 			if captured:
 				identify = self.sensor.security()
-				print(identify)
+				if indentify["ACK"]:
+					currentDate = str(now.year) + "-" + str(now.month) + "-" + str(now.day)
+					time = str(now.hour) + ":" + str(now.minute) + ":" + str(now.second)
+					preparedPayLoad = '{ "command": "ATTENDANCE", "scannerId": "'+ identify["Parameter"] +'", "dateTime": "'+ currentDate +'", "time": "' + time + '" }'
+					self.socket.send(preparedPayLoad)
 
 			self.enrollmentCounter = 0
 			self.enrollment = False
