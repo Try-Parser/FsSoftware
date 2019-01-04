@@ -58,9 +58,12 @@ class App:
 			return self.sensor.enrollmentSecond()
 		elif enrollmentIndex is 3:
 			return self.sensor.enrollmentThird()
+		elif enrollmentIndex is 4:
+			return self.sensor.generateTemplateById(self.enrollmentCandidate)
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
+
 		if self.enrollment and self.enrollmentCounter <= 3:
 			if self.enrollmentCounter is 0:
 				self.getId()
@@ -74,6 +77,9 @@ class App:
 						break
 				self.enrollmentCounter += 1
 				self.sensor.LED(False)
+				if self.enrollmentCounter is 4:
+					print("Template result from enrollment")
+					print(self.switch(self.enrollmentCounter))
 		else:
 			self.enrollmentCounter = 0
 			self.enrollment = False
