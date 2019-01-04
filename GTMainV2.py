@@ -87,12 +87,13 @@ class App:
 		else:
 			return str(number)
 
-	def saveTemplate(self, template, id):
-		sResponse = self.sensor.setTemplate(template, id)
-		if sResponse["ACK"]:
+	def saveTemplate(self, template, index):
+		response = self.sensor.setTemplate(template, index)
+
+		if response["ACK"]:
 			return "successful"
 		else:
-			return sResponse["Parameter"]
+			return response["Parameter"]
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
