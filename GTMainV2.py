@@ -40,6 +40,10 @@ class App:
 		self.userId = ""
 		self.enrollmentCandidate = 0
 
+	def clearDb(self):
+		response = self.sensor.rmAll()
+		print(response)
+
 	def getId(self):
 		candidate_id = 0
 
@@ -104,6 +108,7 @@ class App:
 					if templateResponse[0]['ACK']:
 						preparedPayLoad = '{ "command": "W_REGED", "template": "'+ base64.b64encode(templateResponse[1]['Data']).decode() +'", "userId":"'+str(self.userId)+'", "scannerId":'+str(self.enrollmentCandidate)+'}'
 						self.socket.send(preparedPayLoad)
+						print("payload send")
 			elif not response["ACK"] and response["Parameter"] is 0:
 
 				print("Fingerprint is used")

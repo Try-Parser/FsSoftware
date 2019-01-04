@@ -54,6 +54,7 @@ class EzABS:
 	def on_open(self, ws):
 		print("### Socket Open ###")
 		self.app.setSocket(self.ws)
+		self.app.clearDb()
 		GPIO.setmode(GPIO.BCM)
 		PIN = 18
 		GPIO.setup(PIN, GPIO.IN)
