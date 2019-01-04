@@ -103,9 +103,6 @@ class App:
 
 			if self.enrollmentCounter is 0:
 				self.getId()
-				# resp = self.switch(self.enrollmentCounter)
-				# if resp["ACK"]:
-				# 	self.enrollmentCounter += 1
 				print(self.enrollmentCandidate)
 			sleep(1)
 			response = self.switch(self.enrollmentCounter)
@@ -128,12 +125,17 @@ class App:
 						self.socket.send(preparedPayLoad)
 						print("payload send")
 			elif not response["ACK"] and response["Parameter"] is 0:
-
 				print("Fingerprint is used")
 				self.enrollmentCounter += 1
-
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Fingerprint is in used.", "success": "false", "code":"106" }'
+				self.socket.send(preparedPayLoad)
 			else:
-				print(response["Parameter"])
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ response["Parameter"]+' Sensor Error Restarting enrollment process.", "success": "false", "code":"107" }'
+				self.socket.send(preparedPayLoad)
+				self.enrollment = True
+				self.enrollmentCounter = 0
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Enrollment starts from the begining.", "success": "false", "code":"108" }'
+				self.socket.send(preparedPayLoad)
 		else:
 			now = datetime.datetime.now()
 
@@ -150,7 +152,7 @@ class App:
 					self.socket.send(preparedPayLoad)
 				else:
 					if identify["Parameter"] == "NACK_IDENTIFY_FAILED":
-						preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "false", "message": "Unindentified finger" }'
+						preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "false", "message": "Unindentified finger", "code": "105" }'
 						self.socket.send(preparedPayLoad)
 					
 					print(identify["Parameter"])
