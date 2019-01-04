@@ -102,8 +102,7 @@ class App:
 				if self.enrollmentCounter is 4:
 					templateResponse = self.switch(self.enrollmentCounter)
 					if templateResponse[0]['ACK']:
-						print(templateResponse[1])
-						preparedPayLoad = '{ "command": "W_REGED", "template": "'+ base64.b64encode(templateResponse[1][0]['Data']).decode() +'", "userId":"'+str(self.userId)+'", "sensorId":'+str(self.enrollmentCandidate)+'}'
+						preparedPayLoad = '{ "command": "W_REGED", "template": "'+ base64.b64encode(templateResponse[1]['Data']).decode() +'", "userId":"'+str(self.userId)+'", "sensorId":'+str(self.enrollmentCandidate)+'}'
 						self.socket.send(preparedPayLoad)
 			elif not response["ACK"] and response["Parameter"] is 0:
 
