@@ -50,9 +50,6 @@ class App:
 	                        return True
 
 	def switch(self, enrollmentIndex):
-		print("enrollment index: " + str(enrollmentIndex))
-		sleep(1)
-		
 		if enrollmentIndex is 0:
 			print("candidate_id : " + str(self.enrollmentCandidate))
 			return self.sensor.startEnrollment(self.enrollmentCandidate)
@@ -71,6 +68,7 @@ class App:
 		if self.enrollment and self.enrollmentCounter <= 3:
 			if self.enrollmentCounter is 0:
 				self.getId()
+				print(self.enrollmentCandidate)
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 			if response["ACK"]:

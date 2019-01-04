@@ -176,7 +176,6 @@ class GTSensor:
 			raise RuntimeError("Couldn't send packet.")
 
 	def enrollmentThird(self):
-		print("im in third")
 		if self.writePacket(GT521F5.THIRD_MATCH_SAVE.value, GT521F5.DEFAULT.value):
 			return self.receivedPacket()
 		else:
