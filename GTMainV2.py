@@ -101,7 +101,6 @@ class App:
 
 				self.enrollmentCounter += 1
 				print(self.enrollmentCounter)
-				self.sensor.LED(False)
 
 				if self.enrollmentCounter is 4:
 					templateResponse = self.switch(self.enrollmentCounter)
@@ -117,6 +116,13 @@ class App:
 			else:
 				print(response["Parameter"])
 		else:
+			self.sensor.LED(True)
+			captured = self.__capture_the_lights__():
+
+			if captured:
+				identify = self.sensor.security()
+				print(identify)
+
 			self.enrollmentCounter = 0
 			self.enrollment = False
 			self.cancelEnroll = False
