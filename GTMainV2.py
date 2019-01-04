@@ -148,6 +148,10 @@ class App:
 					preparedPayLoad = '{ "command": "ATTENDANCE", "scannerId": "'+ str(identify["Parameter"]) +'", "dateTime": "'+ currentDate +'", "time": "' + time + '" }'
 					self.socket.send(preparedPayLoad)
 				else:
+					if identify["Parameter"] == "NACK_IDENTIFY_FAILED":
+						preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "false", "message": "Unindentified finger" }'
+						self.socket.send(preparedPayLoad)
+					
 					print(identify["Parameter"])
 
 			self.enrollmentCounter = 0
