@@ -7,6 +7,7 @@ import uuid
 import RPi.GPIO as GPIO
 import base64
 import yaml
+import requests
 
 class EzABS:
 	def  __init__(self):
