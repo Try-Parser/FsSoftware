@@ -144,7 +144,7 @@ class App:
 				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Fingerprint is in used.", "success": "false", "code":"902" }'
 				self.socket.send(preparedPayLoad)
 			else:
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ response["Parameter"]+' Sensor Error Restarting enrollment process.", "success": "false", "code":"903" }'
+				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Sensor Error Restarting enrollment process.", "success": "false", "code":"903" }'
 				self.socket.send(preparedPayLoad)
 				self.enrollment = True
 				self.enrollmentCounter = 0
