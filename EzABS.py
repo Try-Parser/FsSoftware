@@ -10,26 +10,31 @@ import yaml
 
 class EzABS:
 	def  __init__(self):
-		websocket.enableTrace(True)
-		self.ws = websocket.WebSocketApp(
-			"ws://192.168.0.100:8080", 
-			on_message = self.on_message, 
-			on_error = self.on_error, 
-			on_close = self.on_close,
-			header = {
-				'type:sensor', 
-				'mac_address:'+str(hex(uuid.getnode()))
-		})
+		baseUrl = "192.168.0.102:8080"
+		cred = { "username": "ferox.dragon@gmail.com", "password": "frank", "grant_type": "password" }
+		headers = { 'Authorization': 'Basic ZXphYnM6ZnJhbms=', 'Content-Type': 'application/x-www-form-urlencoded'}
+		r = requests.post(url = "http://"+baseUrl+"/oauth/token", params = cred, headers=headers) 
 
-		self.app = App()
+		if r.status_code == requests.codes.ok:
+			websocket.enableTrace(True)
+			self.ws = websocket.WebSocketApp(
+				"ws://"+baseUrl+"/?access_token="+r.json()['access_token'], 
+				on_message = self.on_message, 
+				on_error = self.on_error, 
+				on_close = self.on_close,
+				header = {
+					'type:sensor', 
+					'mac_address:'+str(hex(uuid.getnode()))
+			})
 
-		self.ws.on_open = self.on_open
-		self.terminator = False
-		self.sth = []
-		self.ctr = 0
+			self.app = App()
+			self.ws.on_open = self.on_open
+			self.terminator = False
+			self.sth = []
+			self.ctr = 0
 
-		wss = threading.Thread(target=self.ws.run_forever)
-		wss.start()
+			wss = threading.Thread(target=self.ws.run_forever)
+			wss.start()
 
 	def switch(self, cmd, args) :
 		if cmd == "NU_REG": 
