@@ -62,7 +62,6 @@ class App:
 	def __capture_the_lights__(self):
 	        if self.sensor.senseFinger()[0]['Parameter'] == 0:
 	                print ("Capturing Fingerprint")
-	                sleep(0.1)
 	                if self.sensor.captureFinger(True)['ACK']:
 	                        print ("Captured")
 	                        self.sensor.LED(False)
@@ -115,7 +114,7 @@ class App:
 			if self.enrollmentCounter is 0:
 				self.getId()
 				print(self.enrollmentCandidate)
-			sleep(1)
+				
 			response = self.switch(self.enrollmentCounter)
 			print(response)
 
