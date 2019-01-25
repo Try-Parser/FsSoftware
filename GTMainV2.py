@@ -109,6 +109,7 @@ class App:
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
 		print(self.enrollment)
+		print(self.enrollmentCounter)
 
 		if self.enrollment and self.enrollmentCounter <= 3:
 
