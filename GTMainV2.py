@@ -111,6 +111,8 @@ class App:
 		print(self.enrollment)
 		print(self.enrollmentCounter)
 
+		print(self.enrollment and self.enrollmentCounter <= 3)
+
 		if self.enrollment and self.enrollmentCounter <= 3:
 
 			if self.enrollmentCounter is 0:
