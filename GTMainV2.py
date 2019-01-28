@@ -110,50 +110,59 @@ class App:
 		print("Fingerpressed.")
 		print(self.enrollment)
 		print(self.enrollmentCounter)
-
 		print(self.enrollment and self.enrollmentCounter <= 3)
+
+		procced = False
 
 		if self.enrollment and self.enrollmentCounter <= 3:
 
 			if self.enrollmentCounter is 0:
 				self.getId()
 				print(self.enrollmentCandidate)
-			response = self.switch(self.enrollmentCounter)
-			print(response)
+				response = self.switch(self.enrollmentCounter)
+				if response["ACK"]:
+					self.enrollmentCounter += 1
+					procced = True
+				else
+					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
+					self.socket.send(preparedPayLoad)			
 
-			if response["ACK"]:
-				self.sensor.LED(True)
+			if procced:
+				response = self.switch(self.enrollmentCounter)
+				print(response)
+				if response["ACK"]:
+					self.sensor.LED(True)
 
-				while not self.__capture_the_lights__():
-					if self.cancelEnroll:
-						break
+					while not self.__capture_the_lights__():
+						if self.cancelEnroll:
+							break
 
-				print(self.enrollmentCounter)
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Step '+ str(self.enrollmentCounter)+ '" , "success": "true", "code":"104" }'
-				self.socket.send(preparedPayLoad)
+					print(self.enrollmentCounter)
+					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Step '+ str(self.enrollmentCounter)+ '" , "success": "true", "code":"104" }'
+					self.socket.send(preparedPayLoad)
 
-				self.enrollmentCounter += 1
+					self.enrollmentCounter += 1
 
-				if self.enrollmentCounter is 4:
-					templateResponse = self.switch(self.enrollmentCounter)
-					if templateResponse[0]['ACK']:
-						preparedPayLoad = '{ "command": "W_REGED", "template": "'+ base64.b64encode(templateResponse[1]['Data']).decode() +'", "userId":"'+str(self.userId)+'", "scannerId":'+str(self.enrollmentCandidate)+'}'
-						self.socket.send(preparedPayLoad)
-						print("payload send")
-			elif not response["ACK"] and response["Parameter"] is 0:
-				print("Fingerprint is used")
-				self.enrollmentCounter += 1
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Fingerprint is in used.", "success": "false", "code":"902" }'
-				self.socket.send(preparedPayLoad)
-				self.enrollment = True
-				self.enrollmentCounter = 0
-			else:
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Sensor Error Restarting enrollment process.", "success": "false", "code":"903" }'
-				self.socket.send(preparedPayLoad)
-				self.enrollment = True
-				self.enrollmentCounter = 0
-				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Enrollment starts from the begining.", "success": "false", "code":"904" }'
-				self.socket.send(preparedPayLoad)
+					if self.enrollmentCounter is 4:
+						templateResponse = self.switch(self.enrollmentCounter)
+						if templateResponse[0]['ACK']:
+							preparedPayLoad = '{ "command": "W_REGED", "template": "'+ base64.b64encode(templateResponse[1]['Data']).decode() +'", "userId":"'+str(self.userId)+'", "scannerId":'+str(self.enrollmentCandidate)+'}'
+							self.socket.send(preparedPayLoad)
+							print("payload send")
+				elif not response["ACK"] and response["Parameter"] is 0:
+					print("Fingerprint is used")
+					self.enrollmentCounter += 1
+					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Fingerprint is in used.", "success": "false", "code":"902" }'
+					self.socket.send(preparedPayLoad)
+					self.enrollment = True
+					self.enrollmentCounter = 0
+				else:
+					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Sensor Error Restarting enrollment process.", "success": "false", "code":"903" }'
+					self.socket.send(preparedPayLoad)
+					self.enrollment = True
+					self.enrollmentCounter = 0
+					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Enrollment starts from the begining.", "success": "false", "code":"904" }'
+					self.socket.send(preparedPayLoad)
 		else:
 			now = datetime.datetime.now()
 			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Searching", "success": "true", "code":"103" }'
