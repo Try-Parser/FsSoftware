@@ -13,7 +13,7 @@ class App:
 		self.socket = ""
 
 		self.enrollment = False
-		self.enrollmentCounter = 1
+		self.enrollmentCounter = 0
 
 		self.userId = ""
 		self.enrollmentCandidate = 0
@@ -32,19 +32,13 @@ class App:
 
 	def setEnrollment(self, args):
 		self.getId()
-		response = self.switch(0)
-		print(response)
-		if response["ACK"]:
-			self.enrollment = True
-			self.userId = args["userId"]
-		else:
-			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
-			self.socket.send(preparedPayLoad)	
+		self.enrollment = True
+		self.userId = args["userId"]
 
 	def cancelEnrollment(self):
 		self.cancelEnroll = True
 		self.enrollment = False
-		self.enrollmentCounter = 1
+		self.enrollmentCounter = 0
 		self.userId = ""
 		self.enrollmentCandidate = 0
 
@@ -113,7 +107,6 @@ class App:
 		print("Fingerpressed.")
 
 		if self.enrollment and self.enrollmentCounter <= 3:
-			# if procced:
 				response = self.switch(self.enrollmentCounter)
 				print("IM HERE")
 				print(response)
