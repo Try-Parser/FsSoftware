@@ -33,6 +33,7 @@ class App:
 	def setEnrollment(self, args):
 		response = self.switch(0)
 		print("WTF")
+		print(response)
 		if response["ACK"]:
 			self.enrollmentCounter += 1
 			self.enrollment = True
