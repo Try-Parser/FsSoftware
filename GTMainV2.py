@@ -32,6 +32,7 @@ class App:
 
 	def setEnrollment(self, args):
 		response = self.switch(0)
+		print("WTF")
 		if response["ACK"]:
 			self.enrollmentCounter += 1
 			self.enrollment = True
@@ -117,7 +118,7 @@ class App:
 
 		if self.enrollment and self.enrollmentCounter <= 3:
 			# if self.enrollmentCounter is 0:
-				
+
 			# else:
 			# 	procced = True	
 
