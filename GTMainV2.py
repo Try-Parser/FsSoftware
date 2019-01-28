@@ -13,7 +13,7 @@ class App:
 		self.socket = ""
 
 		self.enrollment = False
-		self.enrollmentCounter = 0
+		self.enrollmentCounter = 1
 
 		self.userId = ""
 		self.enrollmentCandidate = 0
@@ -44,7 +44,7 @@ class App:
 	def cancelEnrollment(self):
 		self.cancelEnroll = True
 		self.enrollment = False
-		self.enrollmentCounter = 0
+		self.enrollmentCounter = 1
 		self.userId = ""
 		self.enrollmentCandidate = 0
 
@@ -73,9 +73,9 @@ class App:
 	                        return True
 
 	def switch(self, enrollmentIndex):
-		if enrollmentIndex is 0:
-			return self.sensor.startEnrollment(self.enrollmentCandidate)
-		elif enrollmentIndex is 1:
+		# if enrollmentIndex is 0:
+		# 	return self.sensor.startEnrollment(self.enrollmentCandidate)
+		if enrollmentIndex is 1:
 			return self.sensor.enrollmentFirst()
 		elif enrollmentIndex is 2:
 			return self.sensor.enrollmentSecond()
