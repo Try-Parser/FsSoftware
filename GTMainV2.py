@@ -73,9 +73,9 @@ class App:
 	                        return True
 
 	def switch(self, enrollmentIndex):
-		# if enrollmentIndex is 0:
-		# 	return self.sensor.startEnrollment(self.enrollmentCandidate)
-		if enrollmentIndex is 1:
+		if enrollmentIndex is 0:
+			return self.sensor.startEnrollment(self.enrollmentCandidate)
+		elif enrollmentIndex is 1:
 			return self.sensor.enrollmentFirst()
 		elif enrollmentIndex is 2:
 			return self.sensor.enrollmentSecond()
