@@ -123,7 +123,7 @@ class App:
 				if response["ACK"]:
 					self.enrollmentCounter += 1
 					procced = True
-				else
+				else:
 					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
 					self.socket.send(preparedPayLoad)			
 
