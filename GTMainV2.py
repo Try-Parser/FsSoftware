@@ -31,8 +31,16 @@ class App:
 		self.socket = ws
 
 	def setEnrollment(self, args):
-		self.enrollment = True
-		self.userId = args["userId"]
+		response = self.switch(0)
+		if response["ACK"]:
+			self.enrollmentCounter += 1
+			self.enrollment = True
+			self.userId = args["userId"]
+			self.getId()
+			procced = True
+		else:
+			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
+			self.socket.send(preparedPayLoad)		
 
 	def cancelEnrollment(self):
 		self.cancelEnroll = True
@@ -108,23 +116,14 @@ class App:
 		procced = False
 
 		if self.enrollment and self.enrollmentCounter <= 3:
-			if self.enrollmentCounter is 0:
-				self.getId()
-				print(self.enrollmentCandidate)
-				response = self.switch(self.enrollmentCounter)
-				print(response)
-				if response["ACK"]:
-					self.enrollmentCounter += 1
-					procced = True
-				else:
-					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
-					self.socket.send(preparedPayLoad)		
-			else:
-				procced = True	
+			# if self.enrollmentCounter is 0:
+				
+			# else:
+			# 	procced = True	
 
-			sleep(1)
+			# sleep(1)
 
-			if procced:
+			# if procced:
 				response = self.switch(self.enrollmentCounter)
 				print("IM HERE")
 				print(response)
