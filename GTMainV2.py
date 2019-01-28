@@ -31,18 +31,15 @@ class App:
 		self.socket = ws
 
 	def setEnrollment(self, args):
+		self.getId()
 		response = self.switch(0)
-		print("WTF")
 		print(response)
 		if response["ACK"]:
-			self.enrollmentCounter += 1
 			self.enrollment = True
 			self.userId = args["userId"]
-			self.getId()
-			procced = True
 		else:
 			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
-			self.socket.send(preparedPayLoad)		
+			self.socket.send(preparedPayLoad)	
 
 	def cancelEnrollment(self):
 		self.cancelEnroll = True
@@ -115,16 +112,7 @@ class App:
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
 
-		procced = False
-
 		if self.enrollment and self.enrollmentCounter <= 3:
-			# if self.enrollmentCounter is 0:
-
-			# else:
-			# 	procced = True	
-
-			# sleep(1)
-
 			# if procced:
 				response = self.switch(self.enrollmentCounter)
 				print("IM HERE")
