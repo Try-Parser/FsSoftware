@@ -148,11 +148,7 @@ class App:
 			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Searching", "success": "true", "code":"103" }'
 			self.socket.send(preparedPayLoad)
 			self.sensor.LED(True)
-			captured = True
-			while not self.__capture_the_lights__():
-				if self.enrollment:
-					captured = False
-					break
+			captured = self.__capture_the_lights__()
 
 			if captured:
 				identify = self.sensor.security()
