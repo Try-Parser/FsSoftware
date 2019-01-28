@@ -112,6 +112,7 @@ class App:
 				self.getId()
 				print(self.enrollmentCandidate)
 				response = self.switch(self.enrollmentCounter)
+				print(response)
 				if response["ACK"]:
 					self.enrollmentCounter += 1
 					procced = True
