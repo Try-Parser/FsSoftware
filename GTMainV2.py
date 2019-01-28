@@ -32,7 +32,6 @@ class App:
 
 	def setEnrollment(self, args):
 		self.enrollment = True
-		print(self.enrollment)
 		self.userId = args["userId"]
 
 	def cancelEnrollment(self):
@@ -51,7 +50,6 @@ class App:
 
 		while True and candidate_id <= 2999 :
 			resp = self.sensor.checkEnrolled(candidate_id)
-			print(resp);
 
 			if resp["Parameter"] is 'NACK_IS_NOT_USED':
 				self.enrollmentCandidate = candidate_id
@@ -117,12 +115,13 @@ class App:
 				if response["ACK"]:
 					self.enrollmentCounter += 1
 					procced = True
-					sleep(0.5)
 				else:
 					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
 					self.socket.send(preparedPayLoad)		
 			else:
 				procced = True	
+
+			sleep(1)
 
 			if procced:
 				response = self.switch(self.enrollmentCounter)
