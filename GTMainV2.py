@@ -126,6 +126,7 @@ class App:
 
 			if procced:
 				response = self.switch(self.enrollmentCounter)
+				print("IM HERE")
 				print(response)
 				if response["ACK"]:
 					self.sensor.LED(True)
