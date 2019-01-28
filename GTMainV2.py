@@ -66,11 +66,6 @@ class App:
 	                        print ("Captured")
 	                        self.sensor.LED(False)
 	                        return True
-	                else:
-	                	self.Sensor.LED(False)
-	                	return False
-	        else:
-	        	return False
 
 	def switch(self, enrollmentIndex):
 		if enrollmentIndex is 0:
