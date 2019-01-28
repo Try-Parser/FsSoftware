@@ -67,10 +67,13 @@ class App:
 	                        print ("Captured")
 	                        self.sensor.LED(False)
 	                        return True
+	                else:
+	                	return False
+	        else:
+	        	return False
 
 	def switch(self, enrollmentIndex):
 		if enrollmentIndex is 0:
-			print("candidate_id : " + str(self.enrollmentCandidate))
 			return self.sensor.startEnrollment(self.enrollmentCandidate)
 		elif enrollmentIndex is 1:
 			return self.sensor.enrollmentFirst()
@@ -130,7 +133,6 @@ class App:
 				procced = True	
 
 			if procced:
-				print("IM HERE")
 				response = self.switch(self.enrollmentCounter)
 				print(response)
 				if response["ACK"]:
@@ -140,7 +142,6 @@ class App:
 						if self.cancelEnroll:
 							break
 
-					print(self.enrollmentCounter)
 					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Step '+ str(self.enrollmentCounter)+ '" , "success": "true", "code":"104" }'
 					self.socket.send(preparedPayLoad)
 
