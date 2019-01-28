@@ -125,7 +125,9 @@ class App:
 					procced = True
 				else:
 					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
-					self.socket.send(preparedPayLoad)			
+					self.socket.send(preparedPayLoad)		
+			else:
+				procced = True	
 
 			if procced:
 				print("IM HERE")
