@@ -33,6 +33,7 @@ class App:
 	def setEnrollment(self, args):
 		self.getId()
 		self.enrollment = True
+		self.enrollmentCounter = 0
 		self.userId = args["userId"]
 
 	def cancelEnrollment(self):
