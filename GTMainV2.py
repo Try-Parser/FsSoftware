@@ -106,14 +106,10 @@ class App:
 
 	def pressedFinger(self, channel):
 		print("Fingerpressed.")
-		print(self.enrollment)
-		print(self.enrollmentCounter)
-		print(self.enrollment and self.enrollmentCounter <= 3)
 
 		procced = False
 
 		if self.enrollment and self.enrollmentCounter <= 3:
-
 			if self.enrollmentCounter is 0:
 				self.getId()
 				print(self.enrollmentCandidate)
@@ -121,6 +117,7 @@ class App:
 				if response["ACK"]:
 					self.enrollmentCounter += 1
 					procced = True
+					sleep(0.5)
 				else:
 					preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "'+ str(response["Parameter"]) +' Failed to register!", "success": "false", "code":"906" }'
 					self.socket.send(preparedPayLoad)		
