@@ -128,6 +128,7 @@ class App:
 					self.socket.send(preparedPayLoad)			
 
 			if procced:
+				print("IM HERE")
 				response = self.switch(self.enrollmentCounter)
 				print(response)
 				if response["ACK"]:
