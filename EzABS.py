@@ -7,14 +7,25 @@ import uuid
 import RPi.GPIO as GPIO
 import base64
 import yaml
+
 import requests
+from requests.packages.urllib3.util.retry import Retry
+from requests.adapters import HTTPAdapter
 
 class EzABS:
 	def  __init__(self):
+		auth = requests.Session()
+
+		retries = Retry(total=5,
+                backoff_factor=1,
+                status_forcelist=[ 500, 502, 503, 504 ])
+
+		s.mount('http://', HTTPAdapter(max_retries=retries))
+
 		baseUrl = "192.168.0.102:8080"
 		cred = { "username": "ferox.dragon@gmail.com", "password": "frank", "grant_type": "password" }
 		headers = { 'Authorization': 'Basic ZXphYnM6ZnJhbms=', 'Content-Type': 'application/x-www-form-urlencoded'}
-		r = requests.post(url = "http://"+baseUrl+"/oauth/token", params = cred, headers=headers) 
+		r = auth.post(url = "http://"+baseUrl+"/oauth/token", params = cred, headers=headers) 
 
 		if r.status_code == requests.codes.ok:
 			websocket.enableTrace(True)
@@ -83,15 +94,9 @@ class EzABS:
 
 	def on_error(self, ws, error):
 		print("Error")
-		sleep(2)
-		wss = threading.Thread(target=self.ws.run_forever)
-		wss.start()
 
 	def on_close(self, ws):
 		print("### Socket Closed ###")
-		sleep(2)
-		wss = threading.Thread(target=self.ws.run_forever)
-		wss.start()
 
 	def on_open(self, ws):
 		print("### Socket Open ###")
