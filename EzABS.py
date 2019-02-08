@@ -20,7 +20,7 @@ class EzABS:
                 backoff_factor=1,
                 status_forcelist=[ 500, 502, 503, 504 ])
 
-		s.mount('http://', HTTPAdapter(max_retries=retries))
+		auth.mount('http://', HTTPAdapter(max_retries=retries))
 
 		baseUrl = "192.168.0.104:8080"
 		cred = { "username": "ferox.dragon@gmail.com", "password": "frank", "grant_type": "password" }
