@@ -82,10 +82,16 @@ class EzABS:
 		self.switch(requestCmd, request)
 
 	def on_error(self, ws, error):
-		print(error)
+		print("Error")
+		sleep(2)
+		wss = threading.Thread(target=self.ws.run_forever)
+		wss.start()
 
 	def on_close(self, ws):
 		print("### Socket Closed ###")
+		sleep(2)
+		wss = threading.Thread(target=self.ws.run_forever)
+		wss.start()
 
 	def on_open(self, ws):
 		print("### Socket Open ###")
