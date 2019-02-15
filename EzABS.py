@@ -93,6 +93,7 @@ class EzABS:
 		self.switch(requestCmd, request)
 
 	def on_error(self, ws, error):
+		print(error)
 		print("Error")
 
 	def on_close(self, ws):
