@@ -22,7 +22,7 @@ class EzABS:
 
 		auth.mount('http://', HTTPAdapter(max_retries=retries))
 
-		baseUrl = "192.168.0.253:8080"
+		baseUrl = "192.168.0.253:8000"
 		cred = { "username": "ferox.dragon@gmail.com", "password": "frank", "grant_type": "password" }
 		headers = { 'Authorization': 'Basic ZXphYnM6ZnJhbms=', 'Content-Type': 'application/x-www-form-urlencoded'}
 		r = auth.post(url = "http://"+baseUrl+"/oauth/token", params = cred, headers=headers) 
@@ -45,7 +45,7 @@ class EzABS:
 			self.sth = []
 			self.ctr = 0
 
-			wss = threading.Thread(target=self.ws.run_forever, kwargs={'ping_interval': 70, 'ping_timeout': 70})
+			wss = threading.Thread(target=self.ws.run_forever, kwargs={'ping_interval': 70, 'ping_timeout': 20})
 			wss.start()
 
 	def switch(self, cmd, args) :
