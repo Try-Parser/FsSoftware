@@ -62,6 +62,7 @@ class App:
 	def __capture_the_lights__(self):
 	        if self.sensor.senseFinger()[0]['Parameter'] == 0:
 	                print ("Capturing Fingerprint")
+	                sleep(1)
 	                if self.sensor.captureFinger(True)['ACK']:
 	                        print ("Captured")
 	                        self.sensor.LED(False)
@@ -148,6 +149,7 @@ class App:
 			preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "message": "Searching", "success": "true", "code":"103" }'
 			self.socket.send(preparedPayLoad)
 			self.sensor.LED(True)
+			sleep(2)
 			captured = self.__capture_the_lights__()
 
 			if captured:
