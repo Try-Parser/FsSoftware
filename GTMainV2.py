@@ -169,7 +169,7 @@ class App:
 			else:
 				self.sensor.LED(False)
 				preparedPayLoad = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "false", "message": "Fingersense Failed", "code": "905" }'
-				self.socket.send(preparedPayload)
+				self.socket.send(preparedPayLoad)
 
 			self.enrollmentCounter = 0
 			self.enrollment = False
