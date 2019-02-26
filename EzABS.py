@@ -45,7 +45,7 @@ class EzABS:
 			self.sth = []
 			self.ctr = 0
 
-			wss = threading.Thread(target=self.ws.run_forever, kwargs={'ping_interval': 70, 'ping_timeout': 20})
+			wss = threading.Thread(target=self.ws.run_forever, kwargs={'ping_interval': 5, 'ping_timeout': 4})
 			wss.start()
 
 	def switch(self, cmd, args) :
