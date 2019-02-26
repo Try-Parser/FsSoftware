@@ -69,7 +69,7 @@ class EzABS:
 					else:
 						success = False
 						code = 906
-					preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response +'", "code": "'+ str(code) +'", "scannerId": "'+ content["scannerId"] +'", "id": "' + content["uid"] + '", "empId": "' + content["emp"]["uid"] + '" }'
+					preparedPayload = '{ "command": "SENSOR_STATUS", "mac_address": "'+ str(hex(uuid.getnode()))+'", "success": "' +str(success)+'", "message": "'+ response +'", "code": "'+ str(code) +'", "scannerId": "'+ str(content["scannerId"]) +'", "id": "' + str(content["uid"]) + '", "empId": "' + str(content["emp"]["uid"]) + '" }'
 					self.ws.send(preparedPayload)
 		else:
 			print("WTF")
