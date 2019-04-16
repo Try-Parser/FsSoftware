@@ -27,6 +27,16 @@
     pip3.6 install pyserial && pip3.6 install websocket-client
     pip3.6 install RPi.GPIO
     pip3.6 install pyyaml
+    pip3.6 install requests
+````
+
+#### - Daemonize
+````
+    sudo crontab -e
+    @reboot sudo python3.6 /opt/FsSoftware/EzABS.py > /opt/FsSoftware/raw_log.txt 2> /opt/FsSoftware/err_logs.txt
+    
+    sudo vim /home/pi/.config/lxsession/LXDE-pi/autostart
+    @chromium-browser --start-fullscreen http://192.168.0.253:80/display
 ````
 
 #### - Resources Link
