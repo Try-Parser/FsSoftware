@@ -24,7 +24,9 @@
 
 #### - Installation of libs
 ````
-    pip3.6 install pyserial && pip3.6 install websocket_client
+    pip3.6 install pyserial && pip3.6 install websocket-client
+    pip3.6 install RPi.GPIO
+    pip3.6 install pyyaml
 ````
 
 #### - Resources Link
