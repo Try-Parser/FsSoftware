@@ -24,7 +24,7 @@
 
 #### - Installation of libs
 ````
-    pip3.6 install pyserial && pip3.6 install websocket-clients
+    pip3.6 install pyserial && pip3.6 install websocket_client
 ````
 
 #### - Resources Link
