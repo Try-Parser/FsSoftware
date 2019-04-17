@@ -24,10 +24,10 @@
 
 #### - Installation of libs
 ````
-    pip3.6 install pyserial && pip3.6 install websocket-client
-    pip3.6 install RPi.GPIO
-    pip3.6 install pyyaml
-    pip3.6 install requests
+    pip3.6 install 'pyserial==3.4' && pip3.6 install 'websocket-client==0.48.0'
+    pip3.6 install 'RPi.GPIO==0.6.5'
+    pip3.6 install 'pyyaml==3.12'
+    pip3.6 install 'requests==2.21.0'
 ````
 
 #### - Daemonize
