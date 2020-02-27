@@ -22,7 +22,7 @@ class EzABS:
 
 		auth.mount('http://', HTTPAdapter(max_retries=retries))
 
-		baseUrl = "192.168.0.253:8000"
+		baseUrl = "58.69.59.238:1495"
 		cred = { "username": "ferox.dragon@gmail.com", "password": "frank", "grant_type": "password" }
 		headers = { 'Authorization': 'Basic ZXphYnM6ZnJhbms=', 'Content-Type': 'application/x-www-form-urlencoded'}
 		r = auth.post(url = "http://"+baseUrl+"/oauth/token", params = cred, headers=headers) 
